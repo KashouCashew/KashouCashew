@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Viticredia</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="space-background" aria-hidden="true"></div>
+
+    <header class="app-header">
+      <h1>Viticredia</h1>
+      <p>Viticredia: rotate the globe, choose a continent, and simulate policy changes over time.</p>
+    </header>
+
+    <main class="app-layout">
+      <section class="world-panel" aria-label="World map area">
+        <div class="time-controls">
+          <span>Advance time:</span>
+          <button class="time-btn" data-step="1">1 day</button>
+          <button class="time-btn" data-step="7">1 week</button>
+          <button class="time-btn" data-step="30">1 month</button>
+          <button class="time-btn" data-step="365">1 year</button>
+          <button class="time-btn" data-step="3650">10 years</button>
+        </div>
+
+        <div class="map-scene">
+          <div class="globe" id="globe" aria-label="Rotating world map">
+            <svg viewBox="0 0 1000 500" role="img" aria-label="Simple world map by continent">
+              <title>Simple world map by continent</title>
+              <rect width="1000" height="500" rx="250" fill="#0f2f55" />
+              <g class="continent" data-region="North America" tabindex="0">
+                <path d="M150 120 L250 80 L360 100 L390 160 L340 210 L280 190 L220 230 L170 220 L120 170 Z" />
+              </g>
+              <g class="continent" data-region="South America" tabindex="0">
+                <path d="M300 240 L360 260 L390 330 L360 430 L320 470 L280 430 L260 360 L270 290 Z" />
+              </g>
+              <g class="continent" data-region="Europe" tabindex="0">
+                <path d="M470 120 L530 110 L570 140 L545 180 L500 180 L460 150 Z" />
+              </g>
+              <g class="continent" data-region="Africa" tabindex="0">
+                <path d="M500 190 L560 200 L590 270 L570 380 L520 430 L470 350 L460 260 Z" />
+              </g>
+              <g class="continent" data-region="Asia" tabindex="0">
+                <path d="M580 110 L730 90 L840 130 L850 200 L770 240 L680 220 L620 250 L570 210 L560 150 Z" />
+              </g>
+              <g class="continent" data-region="Oceania" tabindex="0">
+                <path d="M770 300 L840 290 L880 330 L860 370 L790 360 L750 330 Z" />
+              </g>
+            </svg>
+          </div>
+        </div>
+      </section>
+
+      <aside id="sidebar" class="sidebar" aria-live="polite">
+        <div class="sidebar-header">
+          <div class="tabs" role="tablist" aria-label="Region tabs">
+            <button class="tab-btn active" role="tab" data-tab="overview">Overview</button>
+            <button class="tab-btn" role="tab" data-tab="controls">Controls</button>
+            <button class="tab-btn" role="tab" data-tab="trends">Trends</button>
+          </div>
+          <button id="close-sidebar" class="close-btn" aria-label="Close region panel">×</button>
+        </div>
+
+        <h2 id="region-name">Select a continent</h2>
+        <p id="sim-date">Day 0</p>
+
+        <section class="tab-content active" data-panel="overview">
+          <dl class="metrics-grid" id="metrics-grid"></dl>
+        </section>
+
+        <section class="tab-content" data-panel="controls">
+          <div class="control-group">
+            <label for="tax-rate">Tax rate: <span id="tax-rate-value"></span>%</label>
+            <input id="tax-rate" type="range" min="0" max="60" step="1" />
+          </div>
+          <div class="control-group">
+            <label for="wage-level">Wage level: <span id="wage-level-value"></span></label>
+            <input id="wage-level" type="range" min="50" max="200" step="1" />
+          </div>
+          <div class="control-group">
+            <label for="production-investment">Production investment: <span id="production-investment-value"></span>%</label>
+            <input id="production-investment" type="range" min="0" max="100" step="1" />
+          </div>
+        </section>
+
+        <section class="tab-content" data-panel="trends">
+          <canvas id="trend-chart" width="360" height="180" aria-label="Metrics trend graph"></canvas>
+          <ul class="legend" id="trend-legend"></ul>
+        </section>
+      </aside>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
